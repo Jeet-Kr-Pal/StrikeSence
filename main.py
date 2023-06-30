@@ -7,7 +7,48 @@ import sklearn
 
 # tableau Integration
 
-tableau_embedded_code = """  """
+tableau_embedded_code = """ <div class='tableauPlaceholder' id='viz1688148877123' style='position: relative'>
+<a href='#'><img alt='Stats (L) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StrikeSense&#47;StatsL&#47;1_rss.png' style='border: none' /></a>
+<object class='tableauViz'  style='display:none;'>
+<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+<param name='embed_code_version' value='3' /> <param name='site_root' value='' />
+<param name='name' value='StrikeSense&#47;StatsL' /><param name='tabs' value='no' />
+<param name='toolbar' value='yes' />
+<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StrikeSense&#47;StatsL&#47;1.png' /> 
+<param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' />
+<param name='display_overlay' value='yes' />
+<param name='display_count' value='yes' />
+<param name='language' value='en-US' /></object></div>                
+
+<script type='text/javascript'>                    
+var divElement = document.getElementById('viz1688148877123');                    
+var vizElement = divElement.getElementsByTagName('object')[0];                    
+if ( divElement.offsetWidth > 1000 ) { vizElement.style.width='50%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+else if ( divElement.offsetWidth > 400 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+else { vizElement.style.width='100%';vizElement.style.height='500px';}                     
+var scriptElement = document.createElement('script');                    
+scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+</script> """
+
+tableau_embedded_code_2 = """ <div class='tableauPlaceholder' id='viz1688149026839' style='position: relative'><a href='#'><img alt='Stats (R) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;52&#47;5297ZN55Z&#47;1_rss.png' style='border: none' /></a>
+<object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+<param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;5297ZN55Z' /> 
+<param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;52&#47;5297ZN55Z&#47;1.png' /> 
+<param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
+<param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
+<param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                
+<script type='text/javascript'>                    
+var divElement = document.getElementById('viz1688149026839');                    
+var vizElement = divElement.getElementsByTagName('object')[0];                    
+if ( divElement.offsetWidth > 1000 ) 
+{ vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+else if ( divElement.offsetWidth > 400 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+else { vizElement.style.width='100%';vizElement.style.height='977px';}                     
+var scriptElement = document.createElement('script');                    
+scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+</script> """
 
 st.session_state.fav_text = "Favourite\nclick predict"
 st.session_state.ud_text = "Underdog\nclick predict"
@@ -100,8 +141,8 @@ def btn_click():
     prob_list = head_to_head('Conor McGregor', 'Khabib Nurmagomedov')
     st.session_state.fav_text = f"{round(prob_list[0] * 100, 2)}%"
     st.session_state.ud_text = f"{round(prob_list[1] * 100, 2)}%"
-    c04.text_area('Info_underdog', placeholder=st.session_state.ud_text, label_visibility='hidden')
-    c02.text_area('Info', placeholder=st.session_state.fav_text, label_visibility='hidden')
+    c04.text_area('Info_underdog', value=st.session_state.ud_text, label_visibility='hidden')
+    c02.text_area('Info', value=st.session_state.fav_text, label_visibility='hidden')
     # switch_page('predict')
 
 
@@ -112,7 +153,7 @@ with col3:
     predict_btn = st.button("Predict", on_click=btn_click)
 
 
-c01, c02, c03, c04, c05 = st.columns(5)
+c01, c02, c03, c04, c05 = st.columns([1,2,2,2,1])
 
 with c01:
     st.image(left, use_column_width=True)
@@ -120,17 +161,21 @@ with c01:
 with c02:
     st.title('#')
     st.title('#')
-    st.title('#')
+
 
 
 with c04:
     st.title('#')
     st.title('#')
-    st.title('#')
+
 
 
 with c05:
     st.image(right, use_column_width=True)
 
-st.markdown(tableau_embedded_code, unsafe_allow_html=True)
+
+col1,col2,col3 = st.columns([0.5,0.2,0.5])
+
+col1.markdown(tableau_embedded_code, unsafe_allow_html=True)
+# col3.markdown(tableau_embedded_code_2, unsafe_allow_html=True)
 
